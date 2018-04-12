@@ -83,21 +83,21 @@ count_unicode_error = 0
 count_attribute_error = 0
 for year in years:
     for month in months:
-        file_str = '/Users/Shubham/Documents/Project Stock predictions/data/nytimes/' + str(year) + '-' + '{:02}'.format(
+        file_str = '/Users/Shubham/Documents/Project Stock predictions/data/nytimes ' + str(year) + '-' + '{:02}'.format(
             month) + '.json'
         with open(file_str) as data_file:
             NYTimes_data = json.load(data_file)
-        count_total_articles = count_total_articles + len(NYTimes_data["response"]["docs"][:])
+        count_total_articles = count_total_articles + len(NYTimes_data["response"]["docs"])
         for i in range(len(NYTimes_data["response"]["docs"][:])):
             try:
-                if any(substring in NYTimes_data["response"]["docs"][:][i]['type_of_material'].lower() for substring in
+                if any(substring in NYTimes_data["response"]["docs"][i]['type_of_material'].lower() for substring in
                        type_of_material_list):
-                    if any(substring in NYTimes_data["response"]["docs"][:][i]['section_name'].lower() for substring in
+                    if any(substring in NYTimes_data["response"]["docs"][i]['section_name'].lower() for substring in
                            section_name_list):
                         # count += 1
                         count_articles_filtered += 1
                         # print 'i: ' + str(i)
-                        articles_dict = {your_key: NYTimes_data["response"]["docs"][:][i][your_key] for your_key in
+                        articles_dict = {your_key: NYTimes_data["response"]["docs"][i][your_key] for your_key in
                                          dict_keys}
                         articles_dict['headline'] = articles_dict['headline'][
                             'main']  # Selecting just 'main' from headline
@@ -181,7 +181,7 @@ for date, row in interpolated_df.T.iteritems():
         # print date
         month = date.month
         year = date.year
-        file_str = '/Users/Dinesh/Documents/Project Stock predictions/data/nytimes/' + str(year) + '-' + '{:02}'.format(
+        file_str = '/Users/Shubham/Documents/Project Stock predictions/data/nytimes ' + str(year) + '-' + '{:02}'.format(
             month) + '.json'
         with open(file_str) as data_file:
             NYTimes_data = json.load(data_file)
@@ -226,16 +226,16 @@ for date, row in interpolated_df.T.iteritems():
 
 # Saving the data as pickle file
 interpolated_df.to_pickle(
-    '/Users/Dinesh/Documents/Project Stock predictions/data/pickled_ten_year_filtered_lead_para.pkl')
+    '/Users/Shubham/Documents/Project Stock predictions/data/pickled_ten_year_filtered_lead_para.pkl')
 
 # Save pandas frame in csv form
 interpolated_df.to_csv(
-    '/Users/Dinesh/Documents/Project Stock predictions/data/sample_interpolated_df_10_years_filtered_lead_para.csv',
+    '/Users/Shubham/Documents/Project Stock predictions/data/sample_interpolated_df_10_years_filtered_lead_para.csv',
     sep='\t', encoding='utf-8')
 
 # Reading the data as pickle file
 dataframe_read = pd.read_pickle(
-    '/Users/Dinesh/Documents/Project Stock predictions/data/pickled_ten_year_filtered_lead_para.pkl')
+    '/Users/Shubham/Documents/Project Stock predictions/data/pickled_ten_year_filtered_lead_para.pkl')
 
 #################################################################################
 
